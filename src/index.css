@@ -1,0 +1,104 @@
+/* Google Fonts — DM Serif Display + Sora + JetBrains Mono */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── BRAND TOKENS ─────────────────────────────────────────────────────────── */
+:root {
+  --color-bg:     #160E32;
+  --color-purple: #5B21B6;
+  --color-cyan:   #00D4FF;
+  --color-pink:   #C026D3;
+  --color-gold:   #D4A853;
+  --color-white:  #F5F7FF;
+  --color-gray:   #94A3B8;
+
+  --font-display: 'DM Serif Display', serif;
+  --font-body:    'Sora', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+
+/* ─── BASE ──────────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── MARQUEE KEYFRAMES ─────────────────────────────────────────────────────── */
+@keyframes marqueeLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* ─── GOLD CTA ROTATING BORDER ─────────────────────────────────────────────── */
+@keyframes spinBorder {
+  to { transform: rotate(360deg); }
+}
+
+.gold-cta-wrap {
+  position: relative;
+  display: inline-block;
+  border-radius: 6px;
+}
+
+.gold-cta-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 7px;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-gold) 0%,
+    transparent 30%,
+    var(--color-gold) 60%,
+    transparent 90%,
+    var(--color-gold) 100%
+  );
+  animation: spinBorder 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.gold-cta-wrap:hover::before {
+  opacity: 0.7;
+}
+
+.gold-cta-btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── REDUCED MOTION FALLBACK ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
